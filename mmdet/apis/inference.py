@@ -34,7 +34,7 @@ def init_detector(config, checkpoint=None, device='cuda:0'):
     if checkpoint is not None:
         map_loc = 'cpu' if device == 'cpu' else None
         checkpoint = load_checkpoint(model, checkpoint, map_location=map_loc)
-        if 'CLASSES' in checkpoint['meta']:
+        if 'meta' in checkpoint.keys() and 'CLASSES' in checkpoint['meta']:
             model.CLASSES = checkpoint['meta']['CLASSES']
         else:
             warnings.simplefilter('once')
