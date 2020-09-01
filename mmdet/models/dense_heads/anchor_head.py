@@ -558,6 +558,7 @@ class AnchorHead(BaseDenseHead):
         featmap_sizes = [cls_scores[i].shape[-2:] for i in range(num_levels)]
         mlvl_anchors = self.anchor_generator.grid_anchors(
             featmap_sizes, device=device)
+        # print(mlvl_anchors)
 
         result_list = []
         for img_id in range(len(img_metas)):
@@ -615,7 +616,10 @@ class AnchorHead(BaseDenseHead):
             cls_score = cls_score.permute(1, 2,
                                           0).reshape(-1, self.cls_out_channels)
             if self.use_sigmoid_cls:
+                # print('use sigmoid')
+                # print('shape:', cls_score.shape)
                 scores = cls_score.sigmoid()
+                # print('value[:20]:', scores[0, :20])
             else:
                 scores = cls_score.softmax(-1)
             bbox_pred = bbox_pred.permute(1, 2, 0).reshape(-1, 4)
@@ -623,7 +627,9 @@ class AnchorHead(BaseDenseHead):
             if nms_pre > 0 and scores.shape[0] > nms_pre:
                 # Get maximum scores for foreground classes.
                 if self.use_sigmoid_cls:
+                    # print('get tm max')
                     max_scores, _ = scores.max(dim=1)
+                    # print('max_score:', max_scores[0])
                 else:
                     # remind that we set FG labels to [0, num_class-1]
                     # since mmdet v2.0

@@ -7,10 +7,12 @@ from .res2net import Res2Net
 from .resnet import ResNet, ResNetV1d
 from .resnext import ResNeXt
 from .ssd_vgg import SSDVGG
-from .mbn_v1 import MobileNetV1
-from .mbn_v2 import MobileNetV2
+# from .mbn_v1 import MobileNetV1
+# from .mbn_v2 import MobileNetV2
+from .mobilenet import MobileNetV2
+from .ssd_mbv2 import SSDMobilenetV2
 
 __all__ = [
     'RegNet', 'ResNet', 'ResNetV1d', 'ResNeXt', 'SSDVGG', 'HRNet', 'Res2Net',
-    'HourglassNet', 'DetectoRS_ResNet', 'DetectoRS_ResNeXt', 'MobileNetV1', 'MobileNetV2'
+    'HourglassNet', 'DetectoRS_ResNet', 'DetectoRS_ResNeXt', 'MobileNetV2', 'SSDMobilenetV2'
 ]
